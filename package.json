@@ -1,0 +1,19 @@
+{
+  "name": "webfail_channel",
+  "version": "1.0.0",
+  "description": "A telegram bot that watches the webfail rss feeds and pushes updates to telegram",
+  "main": "index.js",
+  "dependencies": {
+    "download": "^7.1.0",
+    "feed-watcher": "^0.2.1",
+    "file-type": "^8.1.0",
+    "fs-extra": "^6.0.1",
+    "node-telegram-bot-api": "^0.30.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jonas <jonas@wjclub.de>",
+  "license": "ISC"
+}
