@@ -8,10 +8,10 @@ const tgBot     = require('node-telegram-bot-api')
 const bot = new tgBot(process.env.WEBFAIL_BOT_TOKEN)
 
 // Watch german webfail posts
-/*
+
 const deWatcher = new wfWatcher('https://de.webfail.com/rss')
 deWatcher.on('post', post => postNewPost(post, process.env.WEBFAIL_DE_CHANNEL))
-*/
+
 
 // Watch english webfail posts
 const enWatcher = new wfWatcher('https://en.webfail.com/rss')

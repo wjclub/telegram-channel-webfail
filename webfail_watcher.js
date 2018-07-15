@@ -1,5 +1,5 @@
 const Watcher  = require('feed-watcher'),
-    interval = 30, // seconds
+    interval = 20, // seconds
     EventEmitter = require('events'),
     url = require('url'),
     http = require('http'),
@@ -14,6 +14,10 @@ module.exports = function (feed) {
 
 
   watcher.on('new entries', function (entries) {
+
+    // DEBUG:
+    console.log(`Received ${entries.length} new entries`)
+
     entries.forEach( ({title, link}) => {
 
       // Extract the image path
@@ -24,6 +28,8 @@ module.exports = function (feed) {
         res.once('data', chunk => {
           res.destroy();
           const {mime} = fileType(chunk)
+
+          console.log(`New entry "${title}" downloaded. emitting it.`)
 
           // emit an event
           eventer.emit('post', {
