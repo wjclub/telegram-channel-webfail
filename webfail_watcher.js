@@ -3,7 +3,8 @@ const Watcher  = require('feed-watcher'),
     EventEmitter = require('events'),
     url = require('url'),
     http = require('http'),
-    fileType = require('file-type')
+    fileType = require('file-type'),
+    axios = require('axios')
 
 
 // WebFail Watcher exporter
@@ -18,7 +19,27 @@ module.exports = function (feed) {
     // DEBUG:
     console.log(`Received ${entries.length} new entries`)
 
-    entries.forEach( ({title, link}) => {
+    entries.forEach( async ({title, link}) => {
+
+
+      // Extract the video path
+      let videoLink = false
+      try {
+        const html = await axios.get(link)
+
+        const ytMatch = html.data.match(/nocookie\.com\/embed\/([a-zA-Z\d_\-]+)/i)
+        ytMatch.input = undefined
+        console.log(ytMatch)
+        if (ytMatch != null) {
+          videoLink = `https://youtu.be/${ytMatch[1]}`
+        }
+      } catch (videDownloadError) {
+        console.error(videDownloadError)
+      }
+      
+
+      console.log('video: ', videoLink)
+
 
       // Extract the image path
       const postID = url.parse(link).path
@@ -37,6 +58,7 @@ module.exports = function (feed) {
             link,
             imgUrl,
             isGif: (mime === 'image/gif' ? true : false),
+            video: videoLink,
             id: postID
           })
 
@@ -55,6 +77,10 @@ module.exports = function (feed) {
       console.error(err);
     })
 
+  //watcher.emit('new entries', [{ title: 'asd', link: 'http://de.webfail.com/ff47f33a91e' }])
+
+
+
   // Return the event throwing object
   return eventer
 }
@@ -62,3 +88,4 @@ module.exports = function (feed) {
 
 // Stop watching the feed.
 //watcher.stop()
+

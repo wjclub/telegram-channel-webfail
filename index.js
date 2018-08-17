@@ -19,7 +19,7 @@ enWatcher.on('post', post => postNewPost(post, process.env.WEBFAIL_EN_CHANNEL))
 
 
 
-async function postNewPost({title, link, imgUrl, isGif, id}, channelId) {
+async function postNewPost({title, link, imgUrl, isGif, id, video}, channelId) {
 
 
   const params = {
@@ -27,8 +27,12 @@ async function postNewPost({title, link, imgUrl, isGif, id}, channelId) {
     parse_mode: 'HTML'
   }
 
+  if (video) {
+    bot.sendMessage(channelId, `📽 <a href="${video}">${title}</a>`, {parse_mode: 'HTML'})
+  }
+
   // Post photo
-  if (!isGif) {
+  else if (!isGif) {
     bot.sendPhoto(channelId, imgUrl, params)
   }
 
