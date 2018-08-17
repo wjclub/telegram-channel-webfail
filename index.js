@@ -19,11 +19,11 @@ enWatcher.on('post', post => postNewPost(post, process.env.WEBFAIL_EN_CHANNEL))
 
 
 
-async function postNewPost({title, link, imgUrl, isGif, id, video}, channelId) {
+async function postNewPost({title, link, imgUrl, isGif, id, video, twitter}, channelId) {
 
 
   const params = {
-    caption: `<a href="${link}">${title}</a>`,
+    caption: `<a href="${link}">${title}</a>` + (twitter?'\nQuelle: <a href="'+twitter+'">Twitter</a>':''),
     parse_mode: 'HTML'
   }
 

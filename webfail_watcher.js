@@ -24,17 +24,25 @@ module.exports = function (feed) {
 
       // Extract the video path
       let videoLink = false
+      let twitterLink = false
       try {
         const html = await axios.get(link)
 
+        // Check for video
         const ytMatch = html.data.match(/nocookie\.com\/embed\/([a-zA-Z\d_\-]+)/i)
-        ytMatch.input = undefined
-        console.log(ytMatch)
         if (ytMatch != null) {
           videoLink = `https://youtu.be/${ytMatch[1]}`
         }
-      } catch (videDownloadError) {
-        console.error(videDownloadError)
+
+
+        // Check for twitter source link
+        const tweetMatch = html.data.match(/(twitter\.com\/[a-zA-Z\d\-_]+\/status\/\d+)/)
+        if (tweetMatch != null) {
+          twitterLink = 'https://' + tweetMatch[1]
+        }
+
+      } catch (PostPageScrapingError) {
+        console.error('failed while trying to get post page and looking for twitter and youtube links', PostPageScrapingError)
       }
       
 
@@ -59,6 +67,7 @@ module.exports = function (feed) {
             imgUrl,
             isGif: (mime === 'image/gif' ? true : false),
             video: videoLink,
+            twitter: twitterLink,
             id: postID
           })
 
@@ -77,7 +86,7 @@ module.exports = function (feed) {
       console.error(err);
     })
 
-  //watcher.emit('new entries', [{ title: 'asd', link: 'http://de.webfail.com/ff47f33a91e' }])
+  watcher.emit('new entries', [{ title: 'asd', link: 'http://de.webfail.com/d57fa9be522' }])
 
 
 
