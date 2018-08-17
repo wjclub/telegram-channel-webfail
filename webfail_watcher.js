@@ -86,7 +86,7 @@ module.exports = function (feed) {
       console.error(err);
     })
 
-  watcher.emit('new entries', [{ title: 'asd', link: 'http://de.webfail.com/d57fa9be522' }])
+  //watcher.emit('new entries', [{ title: 'asd', link: 'http://de.webfail.com/d57fa9be522' }])
 
 
 
