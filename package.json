@@ -8,7 +8,7 @@
     "download": "^7.1.0",
     "feed-watcher": "^0.2.1",
     "file-type": "^8.1.0",
-    "fs-extra": "^6.0.1",
+    "fs-extra": "^7.0.1",
     "node-telegram-bot-api": "^0.30.0"
   },
   "devDependencies": {},
