@@ -7,7 +7,7 @@
     "axios": "^0.18.0",
     "download": "^7.1.0",
     "feed-watcher": "^0.2.1",
-    "file-type": "^10.9.0",
+    "file-type": "^10.10.0",
     "fs-extra": "^7.0.1",
     "node-telegram-bot-api": "^0.30.0"
   },
