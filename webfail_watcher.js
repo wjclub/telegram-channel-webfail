@@ -65,7 +65,7 @@ module.exports = function (feed) {
 
           // emit an event
           eventer.emit('post', {
-            (title !== null ? title : ``),
+            title: (title !== null ? title : ``),
             link,
             imgUrl,
             isGif: (mime === 'image/gif' ? true : false),
