@@ -57,6 +57,7 @@ module.exports = function (feed) {
         res.once('data', chunk => {
           res.destroy();
           const {mime} = fileType(chunk)
+
           if (title !== null) {
             console.log(`New entry "${title}" downloaded. emitting it.`)
           } else {
