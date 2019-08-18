@@ -58,11 +58,15 @@ module.exports = function (feed) {
           res.destroy();
           const {mime} = fileType(chunk)
 
-          console.log(`New entry "${title}" downloaded. emitting it.`)
+          if (title !== null) {
+            console.log(`New entry "${title}" downloaded. emitting it.`)
+          } else {
+            console.log(`New entry downloaded. emitting it.`)
+          }
 
           // emit an event
           eventer.emit('post', {
-            title,
+            title: (title !== null ? title : ``),
             link,
             imgUrl,
             isGif: (mime === 'image/gif' ? true : false),
