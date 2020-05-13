@@ -9,7 +9,7 @@
     "feed-watcher": "^0.2.1",
     "file-type": "^12.4.2",
     "fs-extra": "^8.1.0",
-    "node-telegram-bot-api": "^0.40.0"
+    "node-telegram-bot-api": "^0.50.0"
   },
   "devDependencies": {},
   "scripts": {
